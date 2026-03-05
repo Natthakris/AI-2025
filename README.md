@@ -1,106 +1,14 @@
 # AI-2025
+<br> โครงงานการสร้างปัญญาประดิษฐ์นี้เป็นการทำนายผลจากลักษณะของเห็ดเพื่อดูว่าเห็ดนี้มีพิษหรือไม่ </br>
+ตารางรายละเอียดของแผนดำเนินโครงงาน ระหว่างเดือนธันวาคม 2568 ถึงเดือนกุมถาพันธ์ 2569
 
-ตารางรายละเอียดของแผนงานที่ต้องทำโครงงาน
-<br>
-<table>
-  <tr>
-    <th rowspan="2">ที่</th>
-    <th></th>
-    <th colspan="12">ระยะเวลาการดำเนินงาน (สัปดาห์)</th>
-  </tr>
-  <tr>
-    <td>กิจกรรม</td>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5</td>
-    <td>6</td>
-    <td>7</td>
-    <td>8</td>
-    <td>9</td>
-    <td>10</td>
-    <td>11</td>
-    <td>12</td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>ค้นคว้าข้อมูล</td>
-    <td>*</td>
-    <td>*</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>ออกแบบ</td>
-    <td></td>
-    <td></td>
-    <td>*</td>
-    <td>*</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>การพัฒนา</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>*</td>
-    <td>*</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>ทดสอบและปรับปรุง</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>*</td>
-    <td>*</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>    
-    <td>5</td>
-    <td>เขียนรายงานสรุป</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>*</td>
-    <td>*</td>
-    <td>*</td>
-    <td>*</td>
-  </tr>
-</table>
+<img width="635" height="238" alt="image" src="https://github.com/user-attachments/assets/b08e3d47-a893-4cc8-b924-c7a269c13d69" />
+
+## เทคโนโลยีที่ใช้
+- **Coding:** Colab 
+- **Language:** Python
+- **Libraries:** (เช่น Pandas, tensorflow, sklearn)
+  
+## วิธีการติดตั้ง
+
+## สะท้อนคิด
