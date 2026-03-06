@@ -2,22 +2,22 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-## --- UI Configuration ---
-st.set_page_config(page_title="Mushroom Poisonous Prediction", layout="wide")
-st.title("🍄 Mushroom Classifier Input")
-st.write("Select the characteristics of the mushroom to check if it's edible or poisonous.")
+# ตั้งค่าหน้าเว็บ
+st.set_page_config(page_title="ระบบทำนายเห็ดพิษ 2025", page_icon="🍄")
 
-## --- Input Options Dictionary ---
-# These match the 'Attribute Information' from your notebook
-options = {
-    'cap-shape': {'b': 'bell', 'c': 'conical', 'x': 'convex', 'f': 'flat', 'k': 'knobbed', 's': 'sunken'},
+st.title("🍄 Mushroom Classification Input")
+st.write("กรุณาเลือกลักษณะของเห็ดเพื่อจัดเก็บข้อมูลลงใน `new_data` สำหรับการทำนาย")
+
+# สร้าง Dictionary เก็บตัวเลือกทั้งหมดตาม Dataset (Mapping อักษรย่อเป็นคำเต็มเพื่อให้ใช้ง่าย)
+options_map = {
+    'cap-shape': {'b': 'bell (ระฆัง)', 'c': 'conical (กรวย)', 'x': 'convex (นูน)', 'f': 'flat (แบน)', 'k': 'knobbed (ปุ่ม)', 's': 'sunken (แอ่ง)'},
     'cap-surface': {'f': 'fibrous', 'g': 'grooves', 'y': 'scaly', 's': 'smooth'},
     'cap-color': {'n': 'brown', 'b': 'buff', 'c': 'cinnamon', 'g': 'gray', 'r': 'green', 'p': 'pink', 'u': 'purple', 'e': 'red', 'w': 'white', 'y': 'yellow'},
-    'bruises': {'t': 'bruises', 'f': 'no'},
+    'bruises': {'t': 'bruises (มีรอยช้ำ)', 'f': 'no (ไม่มี)'},
     'odor': {'a': 'almond', 'l': 'anise', 'c': 'creosote', 'y': 'fishy', 'f': 'foul', 'm': 'musty', 'n': 'none', 'p': 'pungent', 's': 'spicy'},
     'gill-attachment': {'a': 'attached', 'd': 'descending', 'f': 'free', 'n': 'notched'},
     'gill-spacing': {'c': 'close', 'w': 'crowded', 'd': 'distant'},
-    'gill-size': {'b': 'broad', 'n': 'narrow'},
+    'gill-size': {'b': 'broad (กว้าง)', 'n': 'narrow (แคบ)'},
     'gill-color': {'k': 'black', 'n': 'brown', 'b': 'buff', 'h': 'chocolate', 'g': 'gray', 'r': 'green', 'o': 'orange', 'p': 'pink', 'u': 'purple', 'e': 'red', 'w': 'white', 'y': 'yellow'},
     'stalk-shape': {'e': 'enlarging', 't': 'tapering'},
     'stalk-root': {'b': 'bulbous', 'c': 'club', 'u': 'cup', 'e': 'equal', 'z': 'rhizomorphs', 'r': 'rooted', '?': 'missing'},
@@ -34,37 +34,32 @@ options = {
     'habitat': {'g': 'grasses', 'l': 'leaves', 'm': 'meadows', 'p': 'paths', 'u': 'urban', 'w': 'waste', 'd': 'woods'}
 }
 
-## --- Create Input Form ---
-with st.form("mushroom_form"):
-    col1, col2, col3 = st.columns(3)
+# สร้างฟอร์มสำหรับกรอกข้อมูล
+with st.form("mushroom_input_form"):
+    st.subheader("กรอกข้อมูลลักษณะเห็ด")
     
-    user_inputs = {}
-    
-    # Distribute inputs across columns for better UI
-    for i, (key, val_dict) in enumerate(options.items()):
-        current_col = [col1, col2, col3][i % 3]
-        # Use the descriptive name for the label, but store the short key code
-        display_labels = list(val_dict.values())
-        selected_display = current_col.selectbox(f"Select {key}", display_labels)
-        
-        # Reverse lookup: get 'b' from 'bell'
-        short_code = [k for k, v in val_dict.items() if v == selected_display][0]
-        user_inputs[key] = [short_code]
+    # แบ่งหน้าจอเป็น 3 คอลัมน์เพื่อความสวยงาม
+    cols = st.columns(3)
+    user_data = {}
 
-    submitted = st.form_submit_button("Prepare Data for Prediction")
+    for i, (col_name, choices) in enumerate(options_map.items()):
+        with cols[i % 3]:
+            # แสดงชื่อเต็มใน UI แต่เก็บค่าเป็นอักษรย่อ (Key) ลงใน dict
+            selected_label = st.selectbox(f"{col_name}", list(choices.values()))
+            # หา Key จาก Value ที่เลือก
+            short_code = [k for k, v in choices.items() if v == selected_label][0]
+            user_data[col_name] = [short_code]
 
-if submitted:
-    # 1. Create the new_data DataFrame
-    new_data = pd.DataFrame(user_inputs)
-    
-    st.subheader("Original Data (new_data)")
-    st.write(new_data)
+    submit_button = st.form_submit_button(label='บันทึกข้อมูลลง new_data')
 
-    # 2. Logic to align with training columns (X.columns)
-    # Note: In a real app, you should load X.columns from a saved file
-    # For this example, we show how it would look:
-    st.info("The data is now stored in 'new_data' and ready for One-Hot Encoding.")
+# เมื่อกดปุ่ม Submit
+if submit_button:
+    # สร้าง DataFrame ชื่อ new_data ตามที่ต้องการ
+    new_data = pd.DataFrame(user_data)
     
-    # To use this with your model:
-    # new_data_processed = pd.get_dummies(new_data)
-    # new_data_aligned = new_data_processed.reindex(columns=X_columns, fill_value=False)
+    st.success("บันทึกข้อมูลสำเร็จ!")
+    st.subheader("ข้อมูลใน `new_data`:")
+    st.dataframe(new_data)
+    
+    # ส่วนนี้คือการเตรียมข้อมูลก่อนส่งเข้า Model (One-Hot Encoding)
+    st.info("ขั้นตอนถัดไป: นำ `new_data` ไปเข้ากระบวนการ pd.get_dummies() และ reindex ให้ตรงกับ X_columns")
