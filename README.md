@@ -17,7 +17,7 @@ cd AI-2025
   
   ```
 2.ดาวน์โหลดไฟล์ 
-"[คลิกเพื่อโหลด Code](https://github.com/Natthakris/AI-2025/blob/main/AI-2025-Poisonous-Mushroom-Predictions.ipynb)"
+"[คลิกเพื่อโหลด Code](https://github.com/Natthakris/AI-2025/blob/main/AI_2025_Poisonous_Mushroom_Predictions.ipynb)"
 
 ## สะท้อนคิด
 **สิ่งที่ได้เรียนรู้**
